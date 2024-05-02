@@ -1,0 +1,417 @@
+# data coped from https://github.com/bitdreamer/ZWFlashCards/blob/master/wordlists/zz_all.txt
+名,míng,name
+性,xìng,surname
+叫,jiào,to be called
+(我)是,shì,am
+(你/我们/他们)是,shì,are
+(他/她/它)是,shì,is
+是,shì,to be
+你好,nǐhǎo,hello
+我,wǒ,I
+我,wǒ,me
+我的,wǒ de,my/mine
+你,nǐ,you
+你的,nǐ de,your/yours
+它,tā,it
+他,tā,he
+他,tā,him
+他的,tā de,his
+她,tā,she
+她/她的,tā/tā de,her
+我们,wǒmen,we
+我们,wǒmen,us
+我们的,wǒmen de,our
+他们,tāmen,they
+他们的,tāmen de,theirs
+她们,tāmen,they
+亓,qí,their
+好,hǎo,good
+祈,qí,please
+甚么,shénme,what
+一个,yīgè,a
+人,rén,person
+更,gèng,more
+那,nà,those
+这,zhè,these
+一些,yīxiē,some
+一,yī,one
+二,èr,two
+两,liǎng,two
+三,sān,three
+四,sì,four
+五,wǔ,five
+六,liù,six
+七,qī,seven
+八,bā,eight
+九,jiǔ,nine
+十,shí,ten
+十一,shíyī,eleven
+十二,shíèr,twelve
+十三,shísān,thirteen
+十四,shísì,fourteen
+十五,shíwǔ,fifteen
+第一,dìyī,first
+第二,dìèr,second
+第三,dìsān,third
+第四,dìsì,fourth
+第五,dìwǔ,fifth
+第六,dìliù,sixth
+第七,dìqī,seventh
+第八,dìbā,eighth
+第九,dìjiǔ,ninth
+第十,dìshí,tenth
+百,bǎi,hundred
+千,qiān,thousand
+万,wàn,ten thousand
+两,liǎng,both
+多,duō,many
+几,jǐ,how many
+多少,duōshao,how much
+也,yě,also
+不,bù,not
+没,méi,not
+那,nà,that
+这,zhè,this
+红,hóng,red
+白,bái,white
+黑色,hēisè,black
+黄色,huángsè,yellow
+蓝色,lánsè,blue
+绿色,lǜsè,green
+高,gāo,tall
+短,duǎn,short
+漂亮,piàoliang,pretty
+英俊,yīngjùn,handsome
+瘦,shòu,thin
+肥胖,féipán,fat
+为什么,wèishénme,why
+哪儿,nǎr,where
+于,yú,at
+在,zài,in
+上,shàng,on
+下,xià,under
+近,jìn,near
+远,yuǎn,far
+这里,zhèlǐ,here
+谁,shéi,who
+怎样,zěnyàng,how
+哪一个,nǎyīge,which
+但是,dànshì,but
+谢谢,xièxiè,thank you
+因为,yīnwèi,because
+朋友,péngyou,friend
+别,bié,other
+将要,jiāngyào,will
+如果,rúguǒ,if
+跟,gēn,with
+许多,xǔduō,many
+关,guān,close
+长,zhǎng,long
+短,duǎn,short
+业,yè,occupation
+农人,nóngrén,farmer
+工人,gōngrén,worker
+工程师,gōngchéngshī,engineer
+医生,yīshēng,doctor
+护士,hùshi,nurse
+律师,lǜshī,lawyer
+建筑师,jiànzhúshī,architect
+开车人,kāichērén,driver
+厨师,chúshī,chef
+老师,lǎoshī,teacher
+政治家,zhèngzhìjiā,politician
+家,jiā,family
+爸爸,bàbà,father
+妈妈,māmā,mama
+哥哥,gēge,older brother
+妹妹,mèimè,younger sister
+弟弟,dìdì,younger brother
+太太,tàitai,wife
+丈夫,zhàngfu,husband
+儿童,értóng,child
+儿子,érzi,son
+女儿,nǚér,daughter
+表亲,biǎoqīn,cousin
+家,jiā,home
+人,rén,man
+女人,nǚrén,woman
+大哥,dàge,oldest brother
+姐姐,jiějiě,older sister
+生日,shēngrì,birthday
+生,shēng,to be born
+一起,yīqǐ,together
+客气,kèqì,polite
+大家,dàjiā,everyone
+喜欢,xǐhuan,to like
+想,xiǎng,to want
+觉得,juéde,to think
+倒,dào,to go home
+看,kàn,to see
+看书,kànshū,to read
+念,niàn,to read aloud
+试,shì,to try
+笑,xiào,laugh
+唱,chàng,sing
+有,yǒu,to have
+采取,cǎiqǔ,to take
+睡,shuì,to sleep
+去教,qùjiào,to teach
+学,xué,learn
+认识,rènshì,recognize
+爱,ài,love
+拜访,bàifǎng,visit
+给,gěi,give
+去,qù,to go
+帮助,bāngzhù,to help
+找,zhǎo,to look for
+忘,wàng,to forget
+坐,zuò,to sit
+进,jìn,to enter
+回来,huílai,return
+讲,jiǎng,to talk
+打电话,dǎdiànhuà,to make a phone call
+电话,diànhuà,phone call
+见面,jiànmiàn,meet
+待,dài,wait
+快乐,kuàilè,happy
+愤怒,fènnù,angry
+忙,máng,busy
+很,hěn,very
+热,rè,hot
+冷,lěng,cold
+想睡,xiǎngshuì,sleepy
+累,lèi,tired
+能,néng,can
+能,néng,may
+得,děi,must
+快,kuài,fast
+慢,màn,slow
+尴尬,gāngà,embarrassed
+中,zhōng,China
+国,guó,country
+美国,měiguó,USA
+加拿大,jiānádà,Canada
+墨西哥,mòxīgē,Mexico
+德国,déguó,Germany
+法国,fǎguó,France
+英国,yīngguó,England
+印度,yìndù,India
+越南,yuènán,Vietnam
+朝鲜,cháoxiǎn,Korea
+俄国,éguó,Russia
+学校,xuéxiào,school
+学生,xuésheng,student
+纸,zhǐ,paper
+笔,bǐ,pencil
+笔,bǐ,pen
+念书,niànshū,read
+念,niàn,read aloud
+写,xiě,to write
+学习,xuéxí,to study
+学,xué,learn
+练习,liànxí,practice
+试,shì,test
+唱,chàng,sing
+歌曲,gēqǔ,song
+听,tīng,listen
+照片,zhàopiàn,picture
+书,shū,book
+同学,tóngxué,classmate
+现在,xiànzài,present
+缺席,quēxí,absent
+审问,shěnwèn,question
+问题,wèntí,problem
+会议,huìyì,meeting
+办公室,bàngōngshì,office
+面,miàn,face
+知道,zhīdào,know
+了解,liǎojiě,understand
+诉,sù,tell
+语法,yǔfǎ,grammar
+容易,róngyì,easy
+难,nán,difficult
+大写,dàxiě,capital (letter)
+小,xiǎo,small
+大,dà,big
+功课,gōngkè,classwork
+宿舍,sùshè,dormitory
+电脑,diànnǎo,computer
+脑,nǎo,brain
+字,zì,letter
+学期,xuéqī,semester
+信息,xìnxī,message
+运动,yùndòng,sport
+足球,zúqiú,soccer
+篮球,lánqiú,basketball
+棒球,bàngqiú,baseball
+网球,wǎngqiú,tennis
+棋,qí,chess
+赛跑,sàipǎo,running
+电影,diànyǐng,movie
+电视,diànshì,television
+舞蹈,wǔdǎo,dance
+事件,shìjiàn,event
+游戏,yóuxì,game
+表演,biǎoyǎn,show
+音乐会,yīnyuèhuì,concert
+时间,shíjiān,time
+日期,rìqī,date
+今天,jīntiān,today
+昨天,zuótiān,yesterday
+明天,míngtiān,tomorrow
+去年,qùnián,last year
+明年,míngnián,next year
+下,xià,next
+年,nián,year
+今年,jīnnián,this year
+天,tiān,day
+小时,xiǎoshí,hour
+分钟,fēnzhōng,minute
+晚,wǎn,late
+星期一,xīngqīyī,Monday
+星期二,xīngqīèr,Tuesday
+星期三,xīngqīsān,Wednesday
+星期四,xīngqīsì,Thursday
+星期五,xīngqīwǔ,Friday
+星期六,xīngqīliù,Saturday
+星期日,xīngqīrì,Sunday
+月,yuè,month
+一月,yīyuè,January
+二月,èryuè,February
+三月,sānyuè,March
+四月,sìyuè,April
+五月,wǔyuè,May
+六月,liùyuè,June
+七月,qīyuè,July
+八月,bāyuè,August
+九月,jiǔyuè,September
+十月,shíyuè,October
+十一月,shíyīyuè,November
+十二月,shíèryuè,December
+闰年,rùnnián,leap year
+现在,xiànzài,now
+后来,hòulái,later
+上午,shàngwǔ,morning
+下午,xiàwǔ,afternoon
+晚间,wǎnjiān,evening
+早,zǎo,early
+不久,bùjiǔ,soon
+之前,zhīqián,before
+后,hòu,after
+的时候,deshíhòu,when
+直到,zhídào,until
+空儿,kòngr,free time
+平常,píngcháng,usually
+已经,yǐjīng,already
+一齐,yīqí,simultaneously
+最近,zuìjìn,recent
+最后,zuìhòu,last
+旅行,lǚxíng,travel
+到,dào,arrive
+汽车,qìchē,bus
+火车,huǒchē,train
+汽车,qìchē,car
+出租车,chūzūchē,taxi
+地铁,dìtiě,subway
+假期,jiàqī,vacation
+票,piào,ticket
+公,gōng,public
+私人,sīrén,private
+走,zǒu,walk
+赶忙,gǎnmáng,hurry
+飞翔,fēixiáng,fly
+飞机,fēijī,airplane
+机场,jīchǎng,airport
+站,zhàn,station
+租,zū,rent
+驾驶,jiàshǐ,drive
+市,shì,city
+国家,guójiā,country
+路,lù,road
+高速公路,gāosùgōnglù,highway
+饭,fàn,food
+吃,chī,eat
+喝,hē,drink
+可乐,kělè,cola
+水,shuǐ,water
+啤酒,píjiǔ,beer
+水果酒,shuǐguǒjiǔ,wine
+果汁,guǒzhī,fruit juice
+咖啡,kāfēi,coffee
+茶,chá,tea
+奶,nǎi,milk
+早饭,zǎofàn,breakfast
+午饭,wǔfàn,lunch
+晚饭,wǎnfàn,supper
+晚饭,wǎnfàn,dinner
+面包,miànbāo,bread
+米,mǐ,rice
+果酱,guǒjiàng,jam
+香蕉,xiāngjiāo,banana
+橙,chéng,orange
+苹果,píngguǒ,apple
+菠萝,bōluó,pineapple
+芒果,mángguǒ,mango
+谷类,gǔlèi,cereal
+油炸圈饼,yóuzháquānbǐng,doughnut
+三明治,sānmíngzhì,sandwich
+肉,ròu,meat
+干酪,gānlào,cheese
+生菜,shēngcài,lettuce
+芥末,jièmo,mustard
+番茄酱,fānqiéjiàng,ketchup
+盐,yán,salt
+牛肉,niúròu,beef
+鸡,jī,chicken
+鱼,yú,fish
+猪肉,zhūròu,pork
+香肠,xiāngcháng,sausage
+汉堡包,hànbǎobāo,hamburger
+餐馆,cānguǎn,restaurant
+个人,gèrén,personal
+骤雨,zhòuyǔ,shower
+洗澡,xǐzǎo,bathe
+肥皂,féizào,soap
+洗头,xǐ tóu,shampoo
+毛巾,máojīn,towel
+衣服,yīfu,clothes
+内衣,nèiyī,underwear
+胸罩,xiōngzhào,bra
+连衣裙,liányīqún,dress
+衬衫,chènshān,shirt
+衬衫,chènshān,blouse
+裤子,kùzi,pants
+袜子,wàzi,socks
+靸,sǎ,shoes
+上衣,shàngyī,coat
+毛线衣,máoxiàn yī,sweater
+项炼,xiàngliàn,necklace
+环,huán,ring
+眼镜,yǎnjìng,glasses
+穿,chuān,wear
+化妆,huàzhuāng,makeup
+领带,lǐngdài,necktie
+购物,gòuwù,shopping
+商店,shāngdiàn,store
+书记,shūji,clerk
+尺寸,chǐcun,size
+红,hóng,red
+黄,huáng,yellow
+色,sè,color
+蓝,lán,blue
+黑,hēi,black
+白,bái,white
+采买,cǎimǎi,buy
+销售,xiāoshòu,sell
+现金,xiànjīn,cash
+信用卡,xìnyòngkǎ,credit card
+中等,zhōngděng,medium
+大,dà,large
+謏,xiǎo,small
+低廉,dīlián,cheap
+高价,gāojià,expensive
+相同,xiāngtóng,same
+同,tóng,alike
+不同,bùtóng,different
+样式,yàngshì,style
+度过,dùguò,spend
