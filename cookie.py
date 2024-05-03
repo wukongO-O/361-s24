@@ -1,7 +1,8 @@
 import urllib.request
 import ssl
 from bs4 import BeautifulSoup
-
+from random import *
+import re
 
 def fetch_github_db(url):
     """
@@ -12,7 +13,6 @@ def fetch_github_db(url):
 
     with urllib.request.urlopen(url, context=context) as response:
         db = response.read().decode()
-        # print(quotes)
         soup = BeautifulSoup(db, "html.parser")
         texts = soup.findAll("div", {"class": "react-file-line"})
         if texts:
@@ -26,15 +26,70 @@ def get_random_content(contents):
     """
     Return a random element from the given list 
     """
-    pass
+    random_range = len(contents)
+    random_number = randrange(1, random_range)
+    return contents[random_number]
 
 
-def generate_cookie_id():
+def generate_lotto():
     """
-    Generate unique id for a cookie
+    Generate a list of 6 random numbers between 1-45
     """
-    pass
+    lotto = []
+    for _ in range(6):
+        lotto.append(randrange(1, 45))
+    return lotto
 
+def generate_powerball():
+    """
+    Generate a random number between 1 and 45
+    """
+    return randrange(1, 45)
+
+class Cookie:
+    def __init__(self):
+        self._cookie = {
+            'cookie id': 0,
+            'quote': '',
+            'lotto': [],
+            'powerball': 0,
+            'chinese': ''
+        }
+
+    def get_cookie_dict(self):
+        return self._cookie
+
+    def make_full_cookie(self, id, quotes, words):
+        self._cookie['cookie id'] = id
+        self._cookie['quote'] = get_random_content(quotes)
+        self._cookie['lotto'] = generate_lotto()
+        self._cookie['powerball'] = generate_powerball()
+        self._cookie['chinese'] = get_random_content(words)
+        return self.get_cookie_dict()
+
+    def customize_cookie(self, id, quotes, words, option):
+        self._cookie['cookie id'] = id
+        if option == "quote":
+            self._cookie['quote'] = get_random_content(quotes)
+        elif option == "lotto":
+            self._cookie['lotto'] = generate_lotto()
+        elif option == "powerball":
+            self._cookie['powerball'] = generate_powerball()
+        elif option == "chinese":
+            self._cookie['chinese'] = get_random_content(words)
+        else:
+            print("Oops, this is not in our menu.")
+        return self.get_cookie_dict()
+
+    def show_cookie(self):
+        cookie_dict = self.get_cookie_dict()
+        print()
+        print('********FORTUNE COOKIE********')
+        for key, value in cookie_dict.items():
+            if value not in ['', 0, []]:
+                print(f'Your lucky {key}:', value)
+        print('********FORTUNE COOKIE********')
+        print()
 
 def show_features():
     """
@@ -65,57 +120,84 @@ def save_cookies(cookies):
 
 
 def main():
+    # greet users
+    print('Welcome to Fortune Cookie Maker!\n'
+          'Open a cookie with a Confucius quote, lotto numbers, powerball number, and a Chinese word.\n'
+          'Or customize your cookie with any of the above options.\n'
+          'Grab as many fortune cookies as you want.\n'
+          'Your cookies can be saved locally or shipped via email if you wish.\n'
+          'We will never sell your data. Your email will only be used to ship cookies.\n'
+          'Here are the steps: \n'
+          '1. (Optional) Fill out name and email if you want to get the cookies in your inbox. \n'
+          '2. Follow the prompt to enter a command.\n'
+          '3. Repeat step 2 or save cookies or exit.\n')
+    print('A fresh batch is in the oven. One moment...\n')
+
     # fetch quotes and words
-    url_quote = "https://github.com/aussieW/skill-confucius-say/blob/master/dialog/en-us/sayings.dialog"
+    url_quote = "https://github.com/wukongO-O/361-s24/blob/main/db-quotes.txt"
     quotes, words = [], []
     while len(quotes) == 0:
         quotes = fetch_github_db(url_quote)
-    url_word = "https://github.com/bitdreamer/ZWFlashCards/blob/master/wordlists/zz_all.txt"
+    url_word = "https://github.com/wukongO-O/361-s24/blob/main/db-words.txt"
     while len(words) == 0:
         words = fetch_github_db(url_word)
-    print(quotes, words)
+    # print(quotes, words)
 
-    # greet users
-
-    # track cookie ids and contents
+    # track cookie contents, user information
     cookies = []
+    user = {
+        'name': '',
+        'email': ''
+    }
 
     # ask for username and email
+    print("If you'd like to email the cookies later, tell us your name and email address following the prompts.\n"
+          "Otherwise, press return to continue.\n")
+    username = input("Your name: ")
+    email_add = input("Your email: ")
+    user['name'] = username
+    user['email'] = email_add
 
-    # if users want to see features
+    while True:
+        current_command = input("Type 'cookie' to get a new fortune cookie,\n "
+                                "'quote' to get a cookie with quote only, \n"
+                                "'lotto' to get a cookie with lottery numbers only, \n "
+                                "'power' to get a cookie with a power ball number only, \n"
+                                "'chinese' to get a cookie with Chinese word only, \n"
+                                "or 'help' to see the full list of commands: \n")
+        new_cookie = Cookie()
+        new_cookie_id = len(cookies) + 1
 
-    # if users want to see command list
+        # when user enters a non-cookie related command
+        if current_command.lower() == "feature":
+            show_features()
+            continue
+        elif current_command.lower() == "help":
+            show_help()
+            continue
+        elif current_command.lower() == "save.*":
+            save_cookies()
+            continue
+        elif current_command.lower() == "exit":
+            break
 
-    # if users want to save cookies
+        # when user enters a cookie-related command
+        if current_command.lower() == "cookie":
+            new_cookie.make_full_cookie(new_cookie_id, quotes, words)
+        elif current_command.lower() == "quote":
+            new_cookie.customize_cookie(new_cookie_id, quotes, words, "quote")
+        elif current_command.lower() == "lotto":
+            new_cookie.customize_cookie(new_cookie_id, quotes, words, "lotto")
+        elif current_command.lower() == "power":
+            new_cookie.customize_cookie(new_cookie_id, quotes, words, "powerball")
+        elif current_command.lower() == "chinese":
+            new_cookie.customize_cookie(new_cookie_id, quotes, words, "chinese")
+        else:
+            print("Oops, this is not in our menu \n")
+            continue
 
-    # if users choose to exit
-
-    pass
-
-
-# context = ssl._create_unverified_context()
-# with urllib.request.urlopen(url_quote, context=context) as response_quote:
-#     quotes = response_quote.read().decode()
-#     # print(quotes)
-#     soup = BeautifulSoup(quotes, "html.parser")
-#     targets = soup.findAll("div", {"class": "react-file-line"})
-#     if targets:
-#         for target in targets:
-#             # print(target)
-#             target_text = target.get_text()
-#             print(target_text)
-#
-# context2 = ssl._create_unverified_context()
-#
-# with urllib.request.urlopen(url_word, context=context2) as response_word:
-#     words = response_word.read().decode()
-#     # print(words)
-#     soup2 = BeautifulSoup(words, "html.parser")
-#     targets_w = soup2.findAll("div", {"class": "react-file-line"})
-#     if targets_w:
-#         for target_w in targets_w:
-#             target_text2 = target_w.get_text()
-#             print(target_text2)
+        cookies.append(new_cookie)
+        new_cookie.show_cookie()
 
 
 if __name__ == '__main__':

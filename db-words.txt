@@ -1,4 +1,4 @@
-# data coped from https://github.com/bitdreamer/ZWFlashCards/blob/master/wordlists/zz_all.txt
+# data copied from https://github.com/bitdreamer/ZWFlashCards/blob/master/wordlists/zz_all.txt
 名,míng,name
 性,xìng,surname
 叫,jiào,to be called
