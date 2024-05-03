@@ -95,21 +95,38 @@ def show_features():
     """
     Print existing and new features
     """
-    pass
+    print('Features:\n'
+          '- Make a fortune cookie with a Confucius quote, lotto numbers, a power ball number, and a Chinese word.\n'
+          '- Customize a fortune cookie with only a quote, lotto number, a power ball number, or a Chinese word.\n'
+          '- Get unlimited amount of cookies until you call it quits.\n'
+          '- Play with or without providing user information.\n'
+          '- *NEW* Save all or selected fortune cookies to a text file on your computer.\n'
+          '- *NEW* Send all or selected fortune cookies to your email.\n')
 
 
 def show_help():
     """
     Display available commands and tutorials
     """
-    pass
-
-
-def exit_app():
-    """
-    Terminate the app
-    """
-    pass
+    print('Here is the full list of commands in alphabetic order. Type a command word at the cursor and enter return.\n'
+          ' chinese    get a cookie with a Chinese word only.\n'
+          ' cookie     get a cookie with all components.\n'
+          ' exit       terminate the program.\n'
+          ' features   show existing and new features.\n'
+          ' help       show the full list of commands and tutorials.\n'
+          ' lotto      get a cookie with lotto numbers only.\n'
+          ' power      get a cookie with a powerball number only.\n'
+          ' quote      get a cookie with a Confucius quote only.\n'
+          ' save id1 id2 ...       save cookies with given ids to a local text file in the present working directory.\n'
+          '         Separate id numbers by space for multiple cookies.\n'
+          '         For example, "save 3 5 15" saves cookies with ids 3, 5, and 15; "save 3" saves cookie with id 3.\n'
+          ' save -e id1 id2 ...    the e flag is used to send selected cookies to the email a user provided.\n'
+          '         If an email is not provided, the command defaults to saving to a local tet file.\n'
+          '         Separate the e flag and id number(s) by space.\n'
+          '         For example, "save -e 3" saves cookie with id 3 to the provided email.\n'    
+          ' saveall                save all cookies to a local text file in the present working directory.\n'
+          ' saveall -e             the e flag is used to save all cookies to the email a user provided.\n'
+          '         If an email is not provided, the command defaults to saving to a local tet file.\n')
 
 
 def save_cookies(cookies):
@@ -131,7 +148,7 @@ def main():
           '1. (Optional) Fill out name and email if you want to get the cookies in your inbox. \n'
           '2. Follow the prompt to enter a command.\n'
           '3. Repeat step 2 or save cookies or exit.\n')
-    print('A fresh batch is in the oven. One moment...\n')
+    print('A fresh batch of fortune cookies are in the oven. One moment...\n')
 
     # fetch quotes and words
     url_quote = "https://github.com/wukongO-O/361-s24/blob/main/db-quotes.txt"
@@ -169,7 +186,7 @@ def main():
         new_cookie_id = len(cookies) + 1
 
         # when user enters a non-cookie related command
-        if current_command.lower() == "feature":
+        if current_command.lower() == "features":
             show_features()
             continue
         elif current_command.lower() == "help":
