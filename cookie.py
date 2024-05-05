@@ -3,6 +3,7 @@ import ssl
 from bs4 import BeautifulSoup
 from random import *
 import re
+import json
 
 def fetch_github_db(url):
     """
@@ -129,11 +130,56 @@ def show_help():
           '         If an email is not provided, the command defaults to saving to a local tet file.\n')
 
 
-def save_cookies(cookies):
+def save_cookies(cookies, command, user):
     """
-    Save the chosen or all cookies 
+    Save the chosen or all cookies and exit program
     """
-    pass
+    # need to check if cookie id is out of range of cookies
+
+    command_words = command.split(' ')
+    saved_cookies = []
+    if len(command_words) == 1:
+        with open('cookies.json', 'w') as outfile:
+            for cookie in cookies:
+                saved_cookies.append(cookie.get_cookie_dict())
+            json.dump(saved_cookies, outfile)
+        print("All cookies are saved locally.\n")
+    else:
+        e_flag_or_not = command_words[1]
+        if e_flag_or_not == "-e":
+            if len(user['email']) == 0:
+                print("Your email was not provided. Restart the app to provide email or save the cookies locally.\n")
+                return
+            if command_words[0] == "saveall":
+                # email all cookies
+                print("All cookies are successfully sent via email. \n")
+                pass
+            else:
+                print("Your selected cookies are successfully sent via email\n")
+                for i in range(2, len(command_words)):
+                    # email these cookies
+                    pass
+        else:
+            print("Your selected cookie ids are:")
+            for i in range(1, len(command_words)):
+                # save these cookies locally
+                print(f'{command_words[i] }')
+                cur_cookie = cookies[int(command_words[i]) - 1]
+                saved_cookies.append(cur_cookie.get_cookie_dict())
+            # IH8
+            confirm_cookies = input("Are these the right cookies? Press 'y' to confirm, or any other key to cancel.\n")
+            if confirm_cookies.lower() == "y":
+                # ! fix wrong json format when appending
+                # append selected cookies to a local file without erasing previous data
+                # used the approach to append to json file from source: https://stackoverflow.com/questions/67904275/how-to-append-json-to-a-json-file
+                with open('cookies-a.json', 'a') as outfile:
+                    outfile.write(json.dumps(saved_cookies) + '\n')
+                    # json.dump(saved_cookies, outfile)
+            else:
+                return
+            print("Your selected cookies are saved locally.\n")
+    print("You can start over, continue, or exit without losing the data.\n")
+
 
 
 def main():
@@ -170,6 +216,8 @@ def main():
     # ask for username and email
     print("If you'd like to email the cookies later, tell us your name and email address following the prompts.\n"
           "Otherwise, press return to continue.\n")
+    print("We will never sell your data. Your email will only be used to ship cookies.\n"
+          "You will not be able to include an email later.\n")
     username = input("Your name: ")
     email_add = input("Your email: ")
     user['name'] = username
@@ -184,30 +232,31 @@ def main():
                                 "or 'help' to see the full list of commands: \n")
         new_cookie = Cookie()
         new_cookie_id = len(cookies) + 1
+        current_command = current_command.lower()
 
         # when user enters a non-cookie related command
-        if current_command.lower() == "features":
+        if current_command == "features":
             show_features()
             continue
-        elif current_command.lower() == "help":
+        elif current_command == "help":
             show_help()
             continue
-        elif current_command.lower() == "save.*":
-            save_cookies()
+        elif re.search("^save.*", current_command):
+            save_cookies(cookies, current_command, user)
             continue
-        elif current_command.lower() == "exit":
+        elif current_command == "exit":
             break
 
         # when user enters a cookie-related command
-        if current_command.lower() == "cookie":
+        if current_command == "cookie":
             new_cookie.make_full_cookie(new_cookie_id, quotes, words)
-        elif current_command.lower() == "quote":
+        elif current_command == "quote":
             new_cookie.customize_cookie(new_cookie_id, quotes, words, "quote")
-        elif current_command.lower() == "lotto":
+        elif current_command == "lotto":
             new_cookie.customize_cookie(new_cookie_id, quotes, words, "lotto")
-        elif current_command.lower() == "power":
+        elif current_command == "power":
             new_cookie.customize_cookie(new_cookie_id, quotes, words, "powerball")
-        elif current_command.lower() == "chinese":
+        elif current_command == "chinese":
             new_cookie.customize_cookie(new_cookie_id, quotes, words, "chinese")
         else:
             print("Oops, this is not in our menu \n")
