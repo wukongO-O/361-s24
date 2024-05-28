@@ -1,9 +1,15 @@
+import os
 import urllib.request
 import ssl
 from bs4 import BeautifulSoup
 from random import *
 import re
 import json
+# For microservice A - email sender
+from dotenv import load_dotenv
+import requests
+import os
+
 
 def fetch_github_db(url):
     """
@@ -20,6 +26,19 @@ def fetch_github_db(url):
             for item in texts:
                 target_text = item.get_text()
                 result.append(target_text)
+    return result
+
+
+def fetch_text_file_db(file_path):
+    """
+    Get content as a list from a text file
+    :param file_path: relative file path
+    :return: a list of lines from the text file
+    """
+    result = []
+    with open(file_path, 'r') as file:
+        for line in file:
+            result.append(line.strip())
     return result
 
 
@@ -92,6 +111,18 @@ class Cookie:
         print('********FORTUNE COOKIE********')
         print()
 
+    def get_cookie_content(self):
+        """
+        Get the full content of a cookie
+        :return: list of cookie id as a string and a string of full cookie content
+        """
+        cookie_dict = self.get_cookie_dict()
+        cookie_content = []
+        for key, value in cookie_dict.items():
+            if value not in ['', 0, []]:
+                cookie_content.append(f'Your lucky {key}: {value}')
+        return [cookie_dict['cookie id'], '\n'.join(cookie_content)]
+
 def show_features():
     """
     Print existing and new features
@@ -130,6 +161,94 @@ def show_help():
           '         If an email is not provided, the command defaults to saving to a local tet file.\n')
 
 
+def email_cookies(recipient, msg):
+    # Create email
+    load_dotenv()
+    data = {
+
+        # Sender parameters (variables pulled from .env file)
+        "mail_server": os.getenv("SERVER"),
+        "mail_port": os.getenv("PORT"),
+        "mail_username": os.getenv("USERNAME"),
+        "mail_password": os.getenv("PASSWORD"),
+
+        # Email parameters (update with email data; can be taken from CLI or GUI)
+        "recipients": [recipient],
+        "subject": 'Fortune Cookies',
+        "body": msg,
+
+        # Optional parameters (can be deleted if not used)
+        "html": False
+        # "attachments": ["attachment1.txt", "attachment2.txt"]
+    }
+
+    # Send email
+    url = 'http://localhost:5000/send-email'
+    response = requests.post(url, json=data)
+    print(response.json())
+
+def validate_email(user):
+    """
+    Check if the user input of email address has valid syntax
+    :param user: user dictionary
+    :return: None
+    """
+    done_validating = 0
+    while done_validating != 1:
+        email = user['email']
+        comm_file = open('ev-service.txt', 'w')
+        comm_file.write(email)
+        comm_file.close()
+
+        # get response from the service
+        while True:
+            response_file = open('ev-service.txt', 'r')
+            response = response_file.readline()
+            if response == "valid":
+                done_validating = edit_email(user, email)
+                break
+            elif response == "invalid":
+                print("Your email address is invalid. Please try again.")
+                retry_email(user)
+                break
+
+    with open('ev-service.txt', 'w') as comm_file2:
+        comm_file2.write('done')
+
+def edit_email(user, email):
+    """
+    Double check with user about keeping/removing/editing email
+    :param user: user dictionary
+    :param email: email input
+    :return: 1 or 0
+    """
+    user_input = input(f"Do you want to email cookies to the following address: {email}? \n"
+                       f"Enter 'y' to confirm. \n"
+                       f"Enter 'rm' to remove the email. \n"
+                       f"Enter any other key to provide a different email.\n" )
+    command = user_input.lower()
+    if command == "rm":
+        user['email'] = ''
+        print("Your email address is removed. You may proceed as a guest.\n")
+        return 1
+    elif command == "y":
+        print("Your email address is saved. You may use it to get cookies later.\n")
+        return 1
+    else:
+        retry_email(user)
+        return 0
+
+
+def retry_email(user):
+    """
+    Have user enter email address to update the user dictionary
+    :param user: user dictionary
+    :return: None
+    """
+    user_input = input("Please enter your email: ")
+    user['email'] = user_input
+
+
 def save_cookies(cookies, command, user):
     """
     Save the chosen or all cookies and exit program
@@ -147,18 +266,28 @@ def save_cookies(cookies, command, user):
     else:
         e_flag_or_not = command_words[1]
         if e_flag_or_not == "-e":
-            if len(user['email']) == 0:
+            user_email = user['email']
+            if len(user_email) == 0:
                 print("Your email was not provided. Restart the app to provide email or save the cookies locally.\n")
                 return
             if command_words[0] == "saveall":
                 # email all cookies
+                # [LATER -MS: Format cookies]
+                all_cookies = []
+                for c in cookies:
+                    all_cookies.append(c.get_cookie_content()[1])
+                message = '\n\n'.join(all_cookies)
+                email_cookies(user_email, message)
                 print("All cookies are successfully sent via email. \n")
-                pass
             else:
-                print("Your selected cookies are successfully sent via email\n")
+                # email these cookies
+                selected_cookies = []
                 for i in range(2, len(command_words)):
-                    # email these cookies
-                    pass
+                    selected_cookie_id = int(command_words[i])
+                    selected_cookies.append(cookies[selected_cookie_id - 1].get_cookie_content()[1])
+                message = '\n\n'.join(selected_cookies)
+                email_cookies(user_email, message)
+                print("Your selected cookies are successfully sent via email\n")
         else:
             print("Your selected cookie ids are:")
             for i in range(1, len(command_words)):
@@ -196,14 +325,19 @@ def main():
           '3. Repeat step 2 or save cookies or exit.\n')
     print('A fresh batch of fortune cookies are in the oven. One moment...\n')
 
-    # fetch quotes and words
-    url_quote = "https://github.com/wukongO-O/361-s24/blob/main/db-quotes.txt"
-    quotes, words = [], []
-    while len(quotes) == 0:
-        quotes = fetch_github_db(url_quote)
-    url_word = "https://github.com/wukongO-O/361-s24/blob/main/db-words.txt"
-    while len(words) == 0:
-        words = fetch_github_db(url_word)
+    # fetch quotes and words from github
+    # url_quote = "https://github.com/wukongO-O/361-s24/blob/main/db-quotes.txt"
+    # quotes, words = [], []
+    # while len(quotes) == 0:
+    #     quotes = fetch_github_db(url_quote)
+    # url_word = "https://github.com/wukongO-O/361-s24/blob/main/db-words.txt"
+    # while len(words) == 0:
+    #     words = fetch_github_db(url_word)
+
+    # fetch quotes and words from local txt files
+    quotes = fetch_text_file_db('./db-quotes.txt')
+    words = fetch_text_file_db('./db-words.txt')
+
     # print(quotes, words)
 
     # track cookie contents, user information
@@ -219,9 +353,11 @@ def main():
     print("We will never sell your data. Your email will only be used to ship cookies.\n"
           "You will not be able to include an email later.\n")
     username = input("Your name: ")
-    email_add = input("Your email: ")
     user['name'] = username
+
+    email_add = input("Your email: ")
     user['email'] = email_add
+    validate_email(user)
 
     while True:
         current_command = input("Type 'cookie' to get a new fortune cookie,\n "
@@ -264,6 +400,7 @@ def main():
 
         cookies.append(new_cookie)
         new_cookie.show_cookie()
+
 
 
 if __name__ == '__main__':
