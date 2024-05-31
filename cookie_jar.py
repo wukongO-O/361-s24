@@ -1,5 +1,6 @@
 import json
 
+
 def display_by_id():
     # use a json file to format into string
     sorted_result = ''
@@ -13,7 +14,6 @@ def display_by_id():
             sorted_result += '\n'
 
     return sorted_result
-
 
 
 def display_by_type():
@@ -63,6 +63,7 @@ def write_response(result):
     with open('cj_service.txt', 'w') as comm_file:
         comm_file.write(result)
 
+
 def main():
     print("Welcome to cookie jar. The service is listening to your request...")
     request = ''
@@ -70,16 +71,15 @@ def main():
     while request != 'done':
         with open('cj_service.txt', 'r') as data_file:
             request = data_file.readline().lower()
-            # print("req", request)
             if request == 'id':
                  display_response = display_by_id()
-                 # print("display_response", display_response)
                  write_response(display_response)
             elif request == 'type':
                 display_response = display_by_type()
                 write_response(display_response)
 
     print("Your request is fulfilled. Thank you.")
+
 
 if __name__ == '__main__':
     main()
