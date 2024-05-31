@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 import requests
 import os
 
-
+from time import sleep
 def fetch_github_db(url):
     """
     Scrape the textarea content from a github link and return the data in a list
@@ -133,7 +133,8 @@ def show_features():
           '- Get unlimited amount of cookies until you call it quits.\n'
           '- Play with or without providing user information.\n'
           '- *NEW* Save all or selected fortune cookies to a text file on your computer.\n'
-          '- *NEW* Send all or selected fortune cookies to your email.\n')
+          '- *NEW* Send all or selected fortune cookies to your email.\n'
+          '- *NEW* Display all cookies generated so far in sorted order.\n')
 
 
 def show_help():
@@ -158,6 +159,7 @@ def show_help():
           '         For example, "save -e 3" saves cookie with id 3 to the provided email.\n'    
           ' saveall                save all cookies to a local text file in the present working directory.\n'
           ' saveall -e             the e flag is used to save all cookies to the email a user provided.\n'
+          ' sort  display all cookies generated so far in sorted order.\n'
           '         If an email is not provided, the command defaults to saving to a local tet file.\n')
 
 
@@ -196,6 +198,8 @@ def validate_email(user):
     done_validating = 0
     while done_validating != 1:
         email = user['email']
+        if email == '':
+            return
         comm_file = open('ev-service.txt', 'w')
         comm_file.write(email)
         comm_file.close()
@@ -309,7 +313,45 @@ def save_cookies(cookies, command, user):
             print("Your selected cookies are saved locally.\n")
     print("You can start over, continue, or exit without losing the data.\n")
 
+# For Microservice C: Cookie Jar
+def dump_cookies_to_json(cookies):
+    cookies_list = [cookie.get_cookie_dict() for cookie in cookies]
+    with open("cookie_jar.json", 'w') as outfile:
+        json.dump(cookies_list, outfile)
 
+
+def send_request_cj(option):
+    with open("cj_service.txt", "w") as comm_file:
+        comm_file.write(option)
+
+
+def display_response_cj():
+    with open("cj_service.txt", "r") as output_file:
+        output = output_file.readlines()
+        for line in output:
+            print(line.strip())
+
+def display_cookies_sorted(cookies):
+    """
+    Display all cookies generated so far sorted in a specified way
+    :param cookies: a list of cookie objects
+    :return: None
+    """
+    dump_cookies_to_json(cookies)
+    while True:
+        option = input("Enter 'id' if you'd like to see all cookies sorted by id.\n"
+                       "Enter 'type' if you'd like to review all cookies by type.\n"
+                       "Enter 'done' to return to the main program.\n")
+        request = option.lower()
+        if request == "done":
+            send_request_cj(request)
+            break
+        if request not in ['id', 'type']:
+            print("Opps, there is no such option. Please try again.")
+        else:
+            send_request_cj(request)
+            sleep(1)
+            display_response_cj()
 
 def main():
     # greet users
@@ -382,6 +424,9 @@ def main():
             continue
         elif current_command == "exit":
             break
+        elif current_command == "sort":
+            display_cookies_sorted(cookies)
+            continue
 
         # when user enters a cookie-related command
         if current_command == "cookie":
